@@ -1,0 +1,26 @@
+button {
+  font-size: 24px;
+  color: #412019;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+  background-image: url('/assets/button.svg');
+  background-color: #664039;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 73px;
+  width: 116px;
+  border: 1px solid #664039;
+  transition-duration: 0.3s;
+}
+
+button:hover {
+  background-color: rgb(61, 43, 184);
+}
+
+button:active {
+  color: rgba(102, 64, 57, 0.1);
+  background-image: url('/assets/button_pressed.svg');
+  transition-duration: 0.2s;
+}
