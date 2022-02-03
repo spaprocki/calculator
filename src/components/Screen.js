@@ -12,26 +12,34 @@ const Screen = ({ value, active }) => {
         setLowerDisplay('');
         setUpperDisplay('');
       }
-      if (value === 'Clear') {
-        if (lowerDisplay === '' && upperDisplay !== '') {
-          setLowerDisplay(upperDisplay);
+      if (value === 'Clear' && lowerDisplay !== '') {
           setLowerDisplay(lowerDisplay.slice(0, -1));
         }
-        if (lowerDisplay !== '') {
-          setLowerDisplay(lowerDisplay.slice(0, -1));
-        }
-      }
-      if (value === '+-') {
+      if (value === '+/-') {
         if (/[0-9]/.test(lowerDisplay) === true && /^-/.test(lowerDisplay) === true) {
-          setLowerDisplay(lowerDisplay.slice(0, 1));
+          setLowerDisplay(lowerDisplay.substring(1));
         }
-        
+        if (/[0-9]/.test(lowerDisplay) === true && /^-/.test(lowerDisplay) === false) {
+          setLowerDisplay('-' + lowerDisplay);
+        }         
       }
-      if (value === '.') {
-        if (lowerDisplay) setLowerDisplay(lowerDisplay + '(-');
+      if (value === '.' && /[0-9]/.test(lowerDisplay) && /\./.test(lowerDisplay) === false) {
+          setLowerDisplay(lowerDisplay + value);
       }
       if (/[0-9]/.test(value)) {
         setLowerDisplay(lowerDisplay + value);
+      }
+      if (/$\+|^-|\*|%|\/$/.test(value) && /[0-9]/.test(lowerDisplay)) {
+        setUpperDisplay(upperDisplay + lowerDisplay + value);
+        setLowerDisplay('');
+      }
+      if (/\+/.test(value) && /-/.test(value) === false && /[0-9]/.test(lowerDisplay)) {
+        setUpperDisplay(upperDisplay + lowerDisplay + value);
+        setLowerDisplay('');
+      }
+      if (value === '=') {
+        setUpperDisplay(upperDisplay + lowerDisplay + value);
+        setLowerDisplay(eval(upperDisplay + lowerDisplay));
       }
     }
   }, [active]);

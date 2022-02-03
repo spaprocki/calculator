@@ -6,8 +6,8 @@ import Button from './components/Button';
 import React, { useState } from 'react';
 
 const btnValues = [
-  ['C', '+-', '%', '/'],
-  [7, 8, 9, 'X'],
+  ['C', '+/-', '%', '/'],
+  [7, 8, 9, '*'],
   [4, 5, 6, '-'],
   [1, 2, 3, '+'],
   [0, '.','Clear', '='],
