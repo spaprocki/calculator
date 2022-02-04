@@ -5,6 +5,7 @@ import './Screen.css';
 const Screen = ({ value, active }) => {
   const [lowerDisplay, setLowerDisplay] = useState('');
   const [upperDisplay, setUpperDisplay] = useState('');
+  const [isEvaluated, setIsEvaluated] = useState(true);
 
   useEffect(() => {
     if (active === true) {
@@ -38,8 +39,16 @@ const Screen = ({ value, active }) => {
         setLowerDisplay('');
       }
       if (value === '=') {
-        setUpperDisplay(upperDisplay + lowerDisplay + value);
-        setLowerDisplay(eval(upperDisplay + lowerDisplay));
+        try {
+          setIsEvaluated(true)
+          setUpperDisplay(upperDisplay + lowerDisplay + value);
+          setLowerDisplay(eval(upperDisplay + lowerDisplay));
+        }
+        catch (e) {
+          console.log(e);
+          setUpperDisplay('');
+          setLowerDisplay('Error');
+        }
       }
     }
   }, [active]);
