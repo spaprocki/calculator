@@ -19,7 +19,7 @@ function App() {
   const [active, setActive] = useState(false)
 
   return (
-    <Wrapper>
+    <Wrapper class="plate">
       <Screen value={input} active={active} />
       <ButtonBox>
         {btnValues.flat().map((value, i) => {

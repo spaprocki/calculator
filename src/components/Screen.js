@@ -13,10 +13,18 @@ const Screen = ({ value, active }) => {
         setLowerDisplay('');
         setUpperDisplay('');
       }
-      if (value === 'Clear' && lowerDisplay !== '') {
+      if (value === 'Clear') {
+        if (isEvaluated === true) {
+          setIsEvaluated(false);
+          setUpperDisplay('');
+        }
           setLowerDisplay(lowerDisplay.slice(0, -1));
         }
       if (value === '+/-') {
+        if (isEvaluated === true) {
+          setIsEvaluated(false);
+          setUpperDisplay('');
+        }
         if (/[0-9]/.test(lowerDisplay) === true && /^-/.test(lowerDisplay) === true) {
           setLowerDisplay(lowerDisplay.substring(1));
         }
@@ -25,27 +33,45 @@ const Screen = ({ value, active }) => {
         }         
       }
       if (value === '.' && /[0-9]/.test(lowerDisplay) && /\./.test(lowerDisplay) === false) {
+        if (isEvaluated === true) {
+          setIsEvaluated(false);
+          setUpperDisplay('');
+        }
           setLowerDisplay(lowerDisplay + value);
       }
       if (/[0-9]/.test(value)) {
+        if (isEvaluated === true) {
+          setIsEvaluated(false);
+          setUpperDisplay('');
+          setLowerDisplay(value);
+        }
+        if (isEvaluated === false) {
         setLowerDisplay(lowerDisplay + value);
+        }
       }
-      if (/$\+|^-|\*|%|\/$/.test(value) && /[0-9]/.test(lowerDisplay)) {
-        setUpperDisplay(upperDisplay + lowerDisplay + value);
-        setLowerDisplay('');
+      if (/\+$|^-|\*|%|\/$/.test(value) && /[0-9]/.test(lowerDisplay)) {
+        if (isEvaluated === true) {
+          console.log('here we go')
+          setIsEvaluated(false);
+          setUpperDisplay(lowerDisplay + value);
+          setLowerDisplay('')
+        }
+        if (isEvaluated === false) {
+          setUpperDisplay(upperDisplay + lowerDisplay + value);
+          setLowerDisplay('');
+        }
+        
       }
-      if (/\+/.test(value) && /-/.test(value) === false && /[0-9]/.test(lowerDisplay)) {
-        setUpperDisplay(upperDisplay + lowerDisplay + value);
-        setLowerDisplay('');
-      }
+      
       if (value === '=') {
         try {
           setIsEvaluated(true)
           setUpperDisplay(upperDisplay + lowerDisplay + value);
-          setLowerDisplay(eval(upperDisplay + lowerDisplay));
+          setLowerDisplay(eval(upperDisplay + lowerDisplay).toString());
         }
         catch (e) {
           console.log(e);
+          setIsEvaluated(true);
           setUpperDisplay('');
           setLowerDisplay('Error');
         }
