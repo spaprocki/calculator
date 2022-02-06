@@ -1,8 +1,9 @@
 .screen {
-    height: 50px;
     width: 100%;
     margin-bottom: 10px;
     padding: 0 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     background-color: #905d5d;
     border-radius: 10px;
     display: flex;
@@ -11,5 +12,16 @@
     color: #412019;
     font-weight: bold;
     box-sizing: border-box;
-    font-size: 8px;
+  }
+
+  .upper {
+    height: 40px;
+  }
+
+  .lower {
+    height: 60px;
+  }
+
+  .screen-wrapper {
+    width: 100%;
   }

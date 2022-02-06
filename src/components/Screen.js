@@ -1,3 +1,4 @@
+import React from "react";
 import { Textfit } from 'react-textfit';
 import { useState, useEffect } from 'react/cjs/react.development';
 import './Screen.css';
@@ -80,14 +81,14 @@ const Screen = ({ value, active }) => {
   }, [active]);
 
   return (
-    <>
-      <Textfit className='screen' mode='single' max={70}>
-        {upperDisplay}
-      </Textfit>
-      <Textfit className='screen' mode='single' max={70}>
+    <div className="screen-wrapper">
+    <Textfit className='screen upper' mode='single' max={30}>
+      {upperDisplay}
+    </Textfit>
+    <Textfit className='screen lower' mode='single' max={50}>
         {lowerDisplay}
       </Textfit>
-    </>
+    </div>
   );
 };
 
